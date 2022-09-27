@@ -88,7 +88,7 @@ spring:
   datasource:
     hikari:
       driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
-      jdbc-url: jdbc:log4jdbc:postgresql://3.37.90.195:15432/thingsboard?stringtype=unspecified
+      jdbc-url: jdbc:log4jdbc:postgresql://3.37.90.195:1543/thingsboard?stringtype=unspecified
       #jdbc-url: ENC(faumiy23nEeBeafWSKyi0AvnkK2GGvJ2uQChpZW7AyP0fn++hxYujzyncQIoJlyQc2OemEO13wB3t/hjMoNwRw==)
       username: postgres 
       password: rssp11!!
@@ -186,7 +186,7 @@ contract:
 #정기 배치 수동 처리할 최대 목록 개수로, 처리할 데이타가 1000000개 이면 해당 개수:10000 씩 100개 thread 병렬로 처리함 poolmax완 관련되어 있음
 pg:
   list:
-    count: 10000
+    count: 1000
 
 user:
   #서비스 메뉴,Nap status
