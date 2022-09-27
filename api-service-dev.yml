@@ -1,0 +1,200 @@
+server:
+  port: ${port:8089}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+    shutdown:
+      enabled: true
+      sensitive: false      
+eureka:
+  instance:
+    hostname: localhost
+    preferIpAddress: true
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    serviceUrl:
+      defaultZone: ${EUREKA_URL:http://localhost:8761/eureka/}
+    
+webclient:
+  maxInMemorySize: 5242880 #1024*1024*5
+  connectTimeOut: 300000 #3초
+  readTimeOut: 100000
+  writeTimeOut: 100000
+
+download:
+  url: https://dev.rs-aiot.com
+  
+ext:
+  sigfox:
+    cra:
+      url: https://cra-staging.sigfox.com
+      id: 616581a344e9d71c67301c80 
+      user: 616598fae08a8a6f22d452ff 
+      password: ad06c597447e0e8dcaf2e9b4e918e41b 
+    api:
+      url: https://api-staging.sigfox.com
+      id: 61657ef7b45d535f2de23721 
+      user: 61659869b45d535f2de239dc 
+      password: ce1c6370051ca2fac1b81042e1bed262
+
+#tanent 계정 정보
+nap:
+  id: ENC(7ug79ydBf2k6yXze6pID47KQy3THIKrr)
+  pwd: ENC(4QTQ1+1kZ93Skc1jaQf0jg==)    
+jwt: 
+  nap:
+    securiteKey: remotesolutionJwttokenSecuritykeyrsaiotcom #ENC(9R8FjBXinkcqhnTrSLKDy4AQMjGXjAC+xF+nUGGxjphHK7FRF2HowetkSsFbKSTep+WRbz6vSAA=)
+    issuer: rs-aiot.com
+    ttlMills: 86000 #60*60*24
+
+jasypt:
+  encryptor:
+    bean: jasyptStringEncryptor
+    password: rmsrhksflwk
+
+
+spring:
+  main:
+    allow-circular-references: true
+    allow-bean-definition-overriding: true
+  batch:
+    job:
+      enabled: false #기동시 배치 실행 되지 않게 설정(JobLauncher#run 메소드에서 호출되는것을,true이면 기동시 실행 
+    jdbc:
+      initialize-schema: never
+  application:
+    name: apiservice-${instance}
+  sleuth:
+    sampler:
+      probability: 1.0
+  zipkin:
+    base-url: http://127.0.0.1:9411
+#   enabled: true 
+    #base-url: http://3.37.84.176:9411/
+
+#  sample:
+#    zipkin:
+#      enabled: true
+#  servlet:
+#    multipart:
+#      location: c:\\temp\\upload
+#      maxFileSize: 1MB
+#      maxRequestSize: 1MB
+#Database
+  datasource:
+    hikari:
+      driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+      jdbc-url: jdbc:log4jdbc:postgresql://3.37.90.195:5432/thingsboard?stringtype=unspecified
+      #jdbc-url: ENC(faumiy23nEeBeafWSKyi0AvnkK2GGvJ2uQChpZW7AyP0fn++hxYujzyncQIoJlyQc2OemEO13wB3t/hjMoNwRw==)
+      username: postgres 
+      password: rssp11!!
+      #password: ENC(/lJwzdJ43k2GxjCJ6WaewUfggCVLrzUK)
+      auto-commit: true
+      connection-test-query: SELECT 1
+      minimum-idle: 10
+      maximum-pool-size: 50
+      transaction-isolation: TRANSACTION_READ_UNCOMMITTED
+      pool-name: pool-rmsapi
+#JPA
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQL10Dialect
+    properties:
+      hibernate:
+        format_sql: true
+        implicit_naming_strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
+        physical_naming_strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
+        globally_quoted_identifires: true
+    open-in-view: false
+    show-sql: true
+# Pagehelper Setting (사용하는 DB, 페이지 번호의 가능 범위 자동 제한)
+pagehelper:
+  helperDialect: postgresql
+  reasonable: true
+  suportMethodsArgumetns : true
+  #params: count=countSql
+  #pageSizeZero: true
+    
+csr:
+  rootpath: /home/rms/certificate
+  clientpath : ${csr.rootpath}/clientcsr
+  #cmd: ${csr.rootpath}/crtcreate.sh
+  cmd: ${csr.rootpath}/crtcreate.bat
+baseUploadFolder: C:\home\rms\apiservice\data  
+
+#Sap연결 정보
+sap:
+  #client: 110
+  #host: 222.117.127.178
+  client: 500 #TB
+  host: 222.117.127.177 #TB
+  language: KO
+  systemnumber: 00
+  user: RSCM01
+  group: 
+  password: 12345678
+  #connection pool 설정
+  pool:
+    capacity: 5 #허용 pool 갯수
+    limit: 5 #최대 허용 pool 갯
+ 
+iamport:
+  url: https://api.iamport.kr
+  #url: http://localhost:8082
+  api:
+    key: 1094509009804392
+    secret: BQtFw10whZVMwaxg4yac9djyWAQd5JOHzin6joDBoynUJUbNtl0CykbvV2J0LyIlQ5s9t6KRE8Mn2Ybv    
+filedownload:
+  path: /home/rms/filedownload    
+
+#고객 등록시 메뉴 조회 Key값  
+menu_name: menu_new_user
+  
+timeserise:
+  url: 66558d95-e744-3b80-9492-69c4346de059
+  domain: https://dev.rs-aiot.com/api/v1/integrations/http/
+batch:
+  cron: 0 5 0 1 * *  
+
+aws:
+  ses:
+    access-key: AKIA3OAPFH6VJKHNT5ZO
+    secret-key: BCbz426DpCtWcVRAGOR3qO18V6scuev22MYvDpuRQiTy
+    veritied:
+      email: mail@rs-aiot.com
+
+smtp:
+  mail:
+    from: mail@rs-aiot.com
+    name: RMS
+    username: AKIA3OAPFH6VJKHNT5ZO
+    password: BCbz426DpCtWcVRAGOR3qO18V6scuev22MYvDpuRQiTy
+    host: email-smtp.ap-northeast-2.amazonaws.com
+    port: 587
+    tls: TLSv1.2
+    
+payment:
+  limit:
+    min: 100,0.1
+    
+contract:
+  expiration: 7
+
+#정기 배치 수동 처리할 최대 목록 개수로, 처리할 데이타가 1000000개 이면 해당 개수:10000 씩 100개 thread 병렬로 처리함 poolmax완 관련되어 있음
+pg:
+  list:
+    count: 1000
+
+user:
+  #서비스 메뉴,Nap status
+  permission: 
+    #entityGroupId: 2edaf920-b944-11ec-bb23-4ddbb1695f24 ,db 조회
+    roleId: e9f993f0-21ce-11ec-aa3d-41690a4b0f55 #GROUP
+    attributeEntityId: 7facd7d0-92e6-11ec-a587-39ec2b33ec3d #asset 사이드 메뉴ID,f298a150-b93f-11ec-bb23-4ddbb1695f24
+    #tenantId: 60fad480-21ae-11ec-9e69-83d8e9115d54 ,로그인 정보에서 추출
+    genericRoleId: 950fc8d0-4025-11ec-bd3c-959cffcbe4a4 #GENERIC    
+     
+       
