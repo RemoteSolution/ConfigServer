@@ -186,7 +186,7 @@ contract:
 #정기 배치 수동 처리할 최대 목록 개수로, 처리할 데이타가 1000000개 이면 해당 개수:10000 씩 100개 thread 병렬로 처리함 poolmax완 관련되어 있음
 pg:
   list:
-    count: 1000
+    count: 10000
 
 user:
   #서비스 메뉴,Nap status
