@@ -88,7 +88,7 @@ spring:
   datasource:
     hikari:
       driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
-      jdbc-url: jdbc:log4jdbc:postgresql://3.37.90.195:5432/thingsboard?stringtype=unspecified
+      jdbc-url: jdbc:log4jdbc:postgresql://3.37.90.195:15432/thingsboard?stringtype=unspecified
       #jdbc-url: ENC(faumiy23nEeBeafWSKyi0AvnkK2GGvJ2uQChpZW7AyP0fn++hxYujzyncQIoJlyQc2OemEO13wB3t/hjMoNwRw==)
       username: postgres 
       password: rssp11!!
