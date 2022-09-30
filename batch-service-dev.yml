@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: batch-service
+  config:
+    import: "optional:configserver:http://localhost:8888/"
+  cloud:
+    config:
+      name: batch-service
+      profile: ${profile:local}
+  batch:
+    job:
+      #cron: 0 5 0 1 * * #매월 1일 0시 5분
+      cron: 0 0/5 * * * * #테스트 
+    mail:
+      #cron: 0 5 1 * * * #매일 1시 5분
+      cron: 0 0/5 * * * * #테스트
+  
+  

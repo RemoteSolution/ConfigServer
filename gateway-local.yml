@@ -13,11 +13,11 @@ spring:
   cloud:
     gateway:
       routes:
-        - id: api-front-svc
+        - id: apiservice-front
           #uri: http://localhost:8082/
           uri: lb://APISERVICE-FRONT
           predicates:
-            - Path=/api/ui/**
+            - Path=/api/ui/**,/api/batch/**,/api/payment/**,/api/sap/**
           filters:
             #- RewritePath=/api/(?<path>.*),$\{path}
             - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials, RETAIN_UNIQUE
@@ -31,7 +31,7 @@ spring:
           uri: lb://APISERVICE-FRONT
           predicates:
             - Path=/api/batch/**    
-        - id: api-nap-svc
+        - id: apiservice-nap
           #uri: http://localhost:8082/
           uri: lb://APISERVICE-NAP
           predicates:
