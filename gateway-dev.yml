@@ -1,0 +1,20 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: api-user-svc
+          uri: http://localhost:8083/
+          predicates:
+            - Path=/api/v1/user/**
+        - id: apiservice-login
+          #uri: http://localhost:8084/
+          uri: lb://APISERVICE-LOGIN
+          predicates:
+            - Path=/api/v1/login/**    
+        - id: common-auth
+          uri: https://dev.rs-aiot.com
+          predicates:
+            - Path=/api/auth/**
+          filters:
+            - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials, RETAIN_UNIQUE
+        

@@ -1,30 +1,3 @@
-server:
-  port: ${port:8089}
-
-management:
-  endpoints:
-    web:
-      exposure:
-        include: "*"
-    shutdown:
-      enabled: true
-      sensitive: false      
-eureka:
-  instance:
-    hostname: localhost
-    preferIpAddress: true
-  client:
-    fetch-registry: true
-    register-with-eureka: true
-    serviceUrl:
-      defaultZone: ${EUREKA_URL:http://localhost:8761/eureka/}
-    
-webclient:
-  maxInMemorySize: 5242880 #1024*1024*5
-  connectTimeOut: 300000 #3초
-  readTimeOut: 100000
-  writeTimeOut: 100000
-
 download:
   url: https://dev.rs-aiot.com
   
@@ -51,79 +24,12 @@ jwt:
     issuer: rs-aiot.com
     ttlMills: 86000 #60*60*24
 
-jasypt:
-  encryptor:
-    bean: jasyptStringEncryptor
-    password: rmsrhksflwk
-
+rms:
+  makername: RemoteSolutio      
 
 spring:
-  main:
-    allow-circular-references: true
-    allow-bean-definition-overriding: true
-  batch:
-    job:
-      enabled: false #기동시 배치 실행 되지 않게 설정(JobLauncher#run 메소드에서 호출되는것을,true이면 기동시 실행 
-    jdbc:
-      initialize-schema: never
-  application:
-    name: apiservice-${instance}
-  sleuth:
-    sampler:
-      probability: 1.0
   zipkin:
-    base-url: http://127.0.0.1:9411
-#   enabled: true 
-    #base-url: http://3.37.84.176:9411/
-
-#  sample:
-#    zipkin:
-#      enabled: true
-#  servlet:
-#    multipart:
-#      location: c:\\temp\\upload
-#      maxFileSize: 1MB
-#      maxRequestSize: 1MB
-#Database
-  datasource:
-    hikari:
-      driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
-      jdbc-url: jdbc:log4jdbc:postgresql://3.37.90.195:5432/thingsboard?stringtype=unspecified
-      #jdbc-url: ENC(faumiy23nEeBeafWSKyi0AvnkK2GGvJ2uQChpZW7AyP0fn++hxYujzyncQIoJlyQc2OemEO13wB3t/hjMoNwRw==)
-      username: postgres 
-      password: rssp11!!
-      #password: ENC(/lJwzdJ43k2GxjCJ6WaewUfggCVLrzUK)
-      auto-commit: true
-      connection-test-query: SELECT 1
-      minimum-idle: 10
-      maximum-pool-size: 50
-      transaction-isolation: TRANSACTION_READ_UNCOMMITTED
-      pool-name: pool-rmsapi
-#JPA
-  jpa:
-    database-platform: org.hibernate.dialect.PostgreSQL10Dialect
-    properties:
-      hibernate:
-        format_sql: true
-        implicit_naming_strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
-        physical_naming_strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
-        globally_quoted_identifires: true
-    open-in-view: false
-    show-sql: true
-# Pagehelper Setting (사용하는 DB, 페이지 번호의 가능 범위 자동 제한)
-pagehelper:
-  helperDialect: postgresql
-  reasonable: true
-  suportMethodsArgumetns : true
-  #params: count=countSql
-  #pageSizeZero: true
-    
-csr:
-  rootpath: /home/rms/certificate
-  clientpath : ${csr.rootpath}/clientcsr
-  #cmd: ${csr.rootpath}/crtcreate.sh
-  cmd: ${csr.rootpath}/crtcreate.bat
-baseUploadFolder: C:\home\rms\apiservice\data  
+    base-url: https://dev-log.rs-aiot.com
 
 #Sap연결 정보
 sap:
@@ -147,35 +53,7 @@ iamport:
   api:
     key: 1094509009804392
     secret: BQtFw10whZVMwaxg4yac9djyWAQd5JOHzin6joDBoynUJUbNtl0CykbvV2J0LyIlQ5s9t6KRE8Mn2Ybv    
-filedownload:
-  path: /home/rms/filedownload    
 
-#고객 등록시 메뉴 조회 Key값  
-menu_name: menu_new_user
-  
-timeserise:
-  url: 66558d95-e744-3b80-9492-69c4346de059
-  domain: https://dev.rs-aiot.com/api/v1/integrations/http/
-batch:
-  cron: 0 5 0 1 * *  
-
-aws:
-  ses:
-    access-key: AKIA3OAPFH6VJKHNT5ZO
-    secret-key: BCbz426DpCtWcVRAGOR3qO18V6scuev22MYvDpuRQiTy
-    veritied:
-      email: mail@rs-aiot.com
-
-smtp:
-  mail:
-    from: mail@rs-aiot.com
-    name: RMS
-    username: AKIA3OAPFH6VJKHNT5ZO
-    password: BCbz426DpCtWcVRAGOR3qO18V6scuev22MYvDpuRQiTy
-    host: email-smtp.ap-northeast-2.amazonaws.com
-    port: 587
-    tls: TLSv1.2
-    
 payment:
   limit:
     min: 100,0.1
