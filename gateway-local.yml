@@ -1,4 +1,43 @@
-spring:    
+server:
+  port: ${port:8081}
+
+eureka:
+  instance:
+    hostname: localhost
+    prefer-ip-address: true
+  client:
+    fetch-registry: true # 유레카 클라이언트 활성화
+    register-with-eureka: true # 유레카 클라이언트 활성화
+    service-url:
+      defaultZone: ${EUREKA_URL:http://localhost:8761/eureka/} # 유레카 클라이언트로 등록 
+
+logging:
+  config: ${user.home}/core/logback-spring.xml
+  level:
+    reactor:
+      netty: INFO      
+
+authexclude: 
+  endpoint: /api/nap,/api/auth/login,/api/sap,/api/paypal,/api/stripe
+
+napAuthexclude: 
+  endpoint: /api/nap/event/boot,/api/nap/event/token
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: gateway,health
+  endpoint: 
+    gateway:
+      enabled: false   
+spring:
+  profiles:
+    active: ${profile:local}
+  application:
+    name: gateway
+  config:
+    import: "optional:configserver:http://localhost:8888/"    
   sleuth:
     sampler:
       probability: 1.0
