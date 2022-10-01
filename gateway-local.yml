@@ -31,13 +31,7 @@ management:
   endpoint: 
     gateway:
       enabled: false   
-spring:
-  profiles:
-    active: ${profile:local}
-  application:
-    name: gateway
-  config:
-    import: "optional:configserver:http://localhost:8888/"    
+spring:    
   sleuth:
     sampler:
       probability: 1.0
