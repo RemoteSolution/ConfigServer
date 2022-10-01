@@ -54,7 +54,7 @@ spring:
           predicates:
             - Path=/api/sap/**
         - id: common-auth
-          uri: https://www.rs-aiot.com
+          uri: https://gate.rs-aiot.com
           predicates:
             - Path=/api/auth/**,/api/v1/**
           filters:
