@@ -1,8 +1,4 @@
 spring:
-  application:
-    name: gateway
-  profiles:
-    active: ${profile:dev}
   sleuth:
     sampler:
       probability: 1.0
